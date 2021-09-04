@@ -1,0 +1,150 @@
+Storage class in C
+
+auto
+extern
+static
+register
+
+storage class se hme variable ki ye baate pta chlti h 
+
+1.scope :- kha pr hme konse konse function me dikhega
+2.intial value :- garbage value hogi ya kuch or 
+3.lifetime :- kitne time tak vo exist krega.... 
+( like jab tak function exist kr rha h ... yaa jab tak poora program hi exist kr rha h )
+
+
+___________________________________________________________________________________________________
+___________________________________________________________________________________________________
+
+1. auto :-
+          jab ham koi variable bnate h kisi function me. us time default storage class auto hoti h.
+     
+#include <stdio.h>
+
+int main()
+{   auto int i;    //auto lgao ya na lgao koi frk ni pdta ..... kyuki ye default storage class h 
+    int k;
+    for(i=1;i<2;i++)
+    {
+        k=1;
+        
+        printf("%d",k);
+        l++;
+        
+    }
+
+    return 0;
+}
+
+HERE,
+ scope:-it is local variable... can only used in function
+ intial value :- garbage value
+ lifetime :- jab tak mfunction exist krega ttab tak
+
+___________________________________________________________________________________________________
+___________________________________________________________________________________________________
+
+2. extern :-
+           ye global variable jaise hi hote h .... ye kisi bhi function k andr use ho skte h or jo 
+ bhi modification us function m ki jaegi , vo modification ka output aage har jgh reflect hoega.
+
+
+#include <stdio.h>
+
+extern int m=1;   // global variable ban gya ab ye ... kisi bhi function m use kru meri marzi
+//extern int m; ka mtlb h declaration or ye baad m define krna pdega ... yha abhi memory allocate 
+//nhi hui h
+//int m; use kru agr (funtion k bahar ) to yha memory allocation kr di gai h.
+
+void func1(void)
+{
+    printf("%d",m);    // m ki modified value reflect hogi
+
+}
+
+int main()
+{  
+    printf("%d \n",m++);   // m ki value modify kr di gai h 
+    func1();
+
+    return 0;
+}
+
+output --> 5
+           6
+
+
+scope :- whole program and all function ( value modify ho skti h or har jgh fir vhi reflect hogi )
+intial value :- 0
+lifetime :- equal to life of program
+
+* It is recommended that we minimize the use of global variable .... kyuki ye poore program me
+memory leke baitha rhega.... or programmers memory efficient way m use krte h *
+
+___________________________________________________________________________________________________
+___________________________________________________________________________________________________
+
+3. static :- 
+           they are local to where they are declared.
+
+#include <stdio.h>
+
+void func1(void)
+{
+    static int i=10;
+    
+    printf("%d \n\n",i++);
+
+}
+
+int main()
+{  
+    for(int a=1;a<=4;a++)
+    {   
+        printf("call no. %d \n",a);
+        func1();
+        
+    }
+
+    return 0;
+}
+
+output :-
+call no. 1 
+10        // value 10 declare ki thi 
+
+call no. 2 
+11        // modified value hi redeem hui h naa ki derclared vali
+
+call no. 3 
+12        // modified value hi redeem hui h naa ki derclared vali
+
+call no. 4 
+13        // modified value hi redeem hui h naa ki derclared vali
+
+
+
+
+ scope:-har jgh use ho skta h or jab bhi dobara function call hota h apni value redeem rkhta h 
+ intial value :- 0
+ lifetime :- depend krta h use kha pr kiya h 
+
+
+* function memory free kr k vanish ho jaega but ye variable memory pkde rhega.... so minimize it's 
+use *
+___________________________________________________________________________________________________
+___________________________________________________________________________________________________
+
+4. register:-
+            kuch aise variable jo ki bhot jyada frequently use hote h.... unko hm CPU ki register 
+wali memory m dalne k liye register class ka use krte h .... kyuki register CPU k bhot paas hota h 
+or variable bhot fast access hota h .
+
+ scope:- function where it is declared
+ intial value :- garbage value
+ lifetime :- jab tak mfunction exist krega ttab tak
+
+
+agr memory available hoga to hi milegi vrna ... automatically strage class auto m convert ho jaegi
+
+
